@@ -98,12 +98,12 @@ def run_test_harness():
 	trainX, trainY, testX, testY = load_dataset()
 	# prepare pixel data
 	trainX, testX = prep_pixels(trainX, testX)
-	# evaluate model
-	scores, histories = evaluate_model(trainX, trainY)
-	# learning curves
-	summarize_diagnostics(histories)
-	# summarize estimated performance
-	summarize_performance(scores)
+	# define model
+	model = define_model()
+	# fit model
+	model.fit(trainX, trainY, epochs=10, batch_size=32, verbose=0)
+	# save model
+	model.save('final_model.h5')
  
 # entry point, run the test harness
 run_test_harness()
